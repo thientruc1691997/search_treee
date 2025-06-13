@@ -2,7 +2,7 @@
 
 A comprehensive Python implementation of the Ternary Search Tree (TST) data structure with performance analysis, HPC benchmarking, and comparison studies.
 
-## 🎯 Overview
+## Overview
 
 This project implements a Ternary Search Tree (TSTree) in Python for efficient string storage and prefix searching, and compares its performance against traditional data structures like Binary Search Tree (Btree) and Python's built-in set.
 
@@ -92,14 +92,6 @@ ternary-search-tree/
 - Prefix operations (autocompletion)
 - Ordered traversal
 - No hash collisions
-
-**Comparison Results** (example with 10,000 words):
-
-| Operation | TST | Set | Dict | TST Ratio |
-|-----------|-----|-----|------|-----------|
-| Insert    | 0.023s | 0.010s | 0.009s | 2.3x slower |
-| Search    | 0.016s | 0.005s | 0.004s | 3.2x slower |
-| Memory    | ~800KB | ~600KB | ~650KB | 1.3x larger |
 
 **Key Insight**: TST trades 2-3x performance for unique prefix search capabilities.
 
