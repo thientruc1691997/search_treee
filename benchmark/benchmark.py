@@ -1,12 +1,20 @@
 import sys
 import os
+import time
+import random
 project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 if project_root not in sys.path:
     sys.path.insert(0, project_root)
-import time
-import random
+   
 from tstree.tstree import TSTree
 from btree.btree import Btree
+
+# Add project root to sys.path
+
+
+# Helper to simulate time.time_ns() in Python 3.6 (HPC version)
+def time_ns():
+    return int(time.time() * 1e9)
 
 
 def load_words(filepath):
@@ -27,10 +35,10 @@ def benchmark_insert(words, sizes, nr_runs=10, insert_sample_size=20):
 
         total_time = 0.0
         for _ in range(nr_runs):
-            start_time = time.time_ns()
+            start_time = time_ns()
             for word in insert_sample:
                 tstree.insert(word)
-            end_time = time.time_ns()
+            end_time = time_ns()
             total_time += end_time - start_time
 
         avg_time = total_time / (nr_runs * 1_000_000.0)  # in milliseconds
@@ -53,10 +61,10 @@ def benchmark_search_fixed_sample(words, sizes, nr_runs=10, search_sample_size=2
 
         total_time = 0.0
         for _ in range(nr_runs):
-            start_time = time.time_ns()
+            start_time = time_ns()
             for word in search_sample:
                 tstree.search(word)
-            end_time = time.time_ns()
+            end_time = time_ns()
             total_time += end_time - start_time
 
         avg_time = total_time / (nr_runs * 1_000_000.0)
@@ -79,10 +87,10 @@ def benchmark_search_random_sample(words, sizes, nr_runs=10, sample_size=20):
         total_time = 0.0
         for _ in range(nr_runs):
             search_sample = random.sample(sample, k=sample_size)
-            start_time = time.time_ns()
+            start_time = time_ns()
             for word in search_sample:
                 tstree.search(word)
-            end_time = time.time_ns()
+            end_time = time_ns()
             total_time += end_time - start_time
 
         avg_time = total_time / (nr_runs * 1_000_000.0)
@@ -101,40 +109,41 @@ def compare_with_set(words):
     insert_sample = words[:-100]
 
     # Insert into set
-    start = time.time_ns()
+    start = time_ns()
     word_set = set()
     for word in insert_sample:
         word_set.add(word)
-    set_insert_time = (time.time_ns() - start) / 1_000_000.0
+    set_insert_time = (time_ns() - start) / 1_000_000.0
 
     # Insert into TSTree
     word_tstree = TSTree()
-    start = time.time_ns()
+    start = time_ns()
     for word in insert_sample:
         word_tstree.insert(word)
-    tstree_insert_time = (time.time_ns() - start) / 1_000_000.0
+    tstree_insert_time = (time_ns() - start) / 1_000_000.0
 
     # Search from hold_out in set
-    start = time.time_ns()
+    start = time_ns()
     total = 0
     for word in hold_out_sample:
         if word in word_set:
             total += 1
-    set_search_time = (time.time_ns() - start) / 1_000_000.0
+    set_search_time = (time_ns() - start) / 1_000_000.0
 
     # Search from hold_out in TSTree
-    start = time.time_ns()
+    start = time_ns()
     total = 0
     for word in hold_out_sample:
         if word_tstree.search(word):
             total += 1
-    tstree_search_time = (time.time_ns() - start) / 1_000_000.0
+    tstree_search_time = (time_ns() - start) / 1_000_000.0
 
     # Display results
     print(f"Insert time (set):     {set_insert_time:.4f} ms")
     print(f"Insert time (TSTree):  {tstree_insert_time:.4f} ms")
     print(f"Search time (set):     {set_search_time:.4f} ms")
     print(f"Search time (TSTree):  {tstree_search_time:.4f} ms")
+
 
 def time_function(func, *args):
     start = time.perf_counter()
@@ -185,24 +194,25 @@ def compare_btree_tstree(insert_sample, hold_out_sample, prefix="ca"):
     print(f"{'All Strings':<20}{btree_all_time:12.4f}{tstree_all_time:12.4f}")
     print(f"{'Prefix Search':<20}{'N/A':>12}{tstree_prefix_time:12.4f}")
 
+
 if __name__ == "__main__":
     DATA_PATH = os.path.join(os.path.dirname(__file__), '..', 'data', 'corncob_lowercase.txt')
     words = load_words(DATA_PATH)
-    
+
     print(f"Total words loaded: {len(words)}")
     print("First 10 words:", words[:10])
-    
+
     sizes = [100, 500, 1_000, 5_000, 10_000, 20_000, 30_000, 40_000, 50_000]
 
     insert_results = benchmark_insert(words, sizes)
     fixed_search_results = benchmark_search_fixed_sample(words, sizes)
     random_search_results = benchmark_search_random_sample(words, sizes)
-    
+
     # Compare with set
     compare_with_set(words)
-    
-    # Compare TSTree and Btree
-    random.shuffle(words)   
-    hold_out_sample = words[-100:]  
-    insert_sample = words[:-100]   
+
+    # Compare TSTree and BTree
+    random.shuffle(words)
+    hold_out_sample = words[-100:]
+    insert_sample = words[:-100]
     compare_btree_tstree(insert_sample, hold_out_sample, prefix="ca")
