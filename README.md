@@ -32,7 +32,7 @@ ternary-search-tree/
 │   ├── __init__.py
 │   └── tstree.py
 │
-├── btree/                  # Btree implementation (used for comparison)
+├── btree/                  # Btree implementation (used for comparison with TSTree)
 │   ├── __init__.py
 │   └── btree.py
 │
@@ -41,7 +41,7 @@ ternary-search-tree/
 │   └── tests_tstree.py
 │
 ├── slurm_job.sh            # SLURM script to run benchmarks on HPC
-├── README.md               # This file
+├── README.md               
 └── .gitignore
 ```
 
@@ -70,7 +70,7 @@ ternary-search-tree/
 
 3. **Run Benchmarks**:
    ```bash
-   python3 benchmark/benchmark.py
+   python3 -m benchmark.benchmark
    ```
 4. **Run Test**:
    ```bash
