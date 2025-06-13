@@ -31,13 +31,12 @@ ternary-search-tree/
 ├── 
 ├── tests/                        # Test suite
 │   ├── __init__.py
-│   ├── test_correctness.py       # Correctness tests
 │   ├── test_performance.py       # Performance tests
 │   └── conftest.py               # Test configuration
 ├── 
 ├── benchmarks/                   # Performance benchmarking
-│   ├── hpc_benchmark.py          # HPC benchmarking script
-│   ├── hpc_job_script.sh         # SLURM job script
+│   ├── benchmark.py          # HPC benchmarking script
+│   ├── slurm_job.sh         # SLURM job script
 │   └── results/                  # Benchmark results (generated)
 ├── 
 ├── data/                         # Test datasets
@@ -81,54 +80,6 @@ ternary-search-tree/
    pip install -e .
    ```
 
-### Basic Usage
-
-```python
-from src.tst import TernarySearchTree
-
-# Create a new TST
-tst = TernarySearchTree()
-
-# Insert words
-tst.insert("cat")
-tst.insert("car")
-tst.insert("card")
-tst.insert("care")
-
-# Search for words
-print(tst.search("car"))      # True
-print(tst.search("dog"))      # False
-
-# Find words with prefix (autocompletion)
-words = tst.starts_with("car")
-print(words)  # ['car', 'card', 'care']
-
-# Get all words
-all_words = tst.get_all_words()
-print(all_words)  # ['car', 'card', 'care', 'cat']
-
-# Delete words
-tst.delete("car")
-print(tst.search("car"))      # False
-```
-
-## 🧪 Testing
-
-### Run All Tests
-
-```bash
-# Basic test run
-python scripts/run_tests.py
-
-# With coverage report
-python scripts/run_tests.py --coverage
-
-# Include slow tests
-python scripts/run_tests.py --slow
-
-# Verbose output
-python scripts/run_tests.py --verbose
-```
 
 ### Run Specific Tests
 
@@ -287,44 +238,6 @@ mypy src/tst/ --ignore-missing-imports
 4. Run the test suite: `python scripts/run_tests.py`
 5. Submit a pull request
 
-### Commit Convention
-
-- `feat:` New features
-- `fix:` Bug fixes
-- `test:` Adding tests
-- `docs:` Documentation updates
-- `perf:` Performance improvements
-
-## 📚 Academic Context
-
-This implementation was developed as part of a computer science course project focusing on:
-
-- **Data Structure Implementation**: Object-oriented design principles
-- **Algorithm Analysis**: Time and space complexity evaluation
-- **Performance Evaluation**: Empirical analysis and comparison
-- **High-Performance Computing**: Scalability testing on HPC infrastructure
-- **Software Engineering**: Testing, documentation, and version control
-
-The project demonstrates practical application of theoretical concepts in a real-world implementation with comprehensive analysis.
-
-## 📄 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## 🙏 Acknowledgments
-
-- Course instructors and teaching assistants
-- [VSC (Vlaams Supercomputer Centrum)](https://www.vscentrum.be/) for HPC resources
-- Contributors to the [corncob word list](http://www.mieliestronk.com/wordlist.html)
-- Open source community for tools and libraries
-
-## 📞 Contact
-
-- **Author**: Your Name
-- **Email**: your.email@university.edu
-- **Course**: Data Structures and Algorithms
-- **Institution**: Your University
-- **Year**: 2024-2025
 
 ## 📖 References
 
@@ -333,6 +246,3 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 3. [Wikipedia: Ternary Search Tree](https://en.wikipedia.org/wiki/Ternary_search_tree)
 4. [VSC Documentation](https://docs.vscentrum.be/) for HPC usage guidelines
 
----
-
-**Note**: Replace placeholder information (URLs, email addresses, institution names) with your actual details before submission.
