@@ -4,7 +4,7 @@ A comprehensive Python implementation of the Ternary Search Tree (TST) data stru
 
 ## 🎯 Overview
 
-This project implements a **Ternary Search Tree**, a tree-based data structure that combines the benefits of binary search trees and tries for efficient string operations. The implementation includes comprehensive testing, performance benchmarking on HPC infrastructure, and detailed analysis compared to built-in Python data structures.
+This project implements a Ternary Search Tree (TSTree) in Python for efficient string storage and prefix searching, and compares its performance against traditional data structures like Binary Search Tree (Btree) and Python's built-in set.
 
 ### Key Features
 
@@ -19,42 +19,33 @@ This project implements a **Ternary Search Tree**, a tree-based data structure t
 
 ```
 ternary-search-tree/
-├── README.md                      # This file
-├── requirements.txt               # Python dependencies
-├── setup.py                      # Package setup configuration
-├── 
-├── src/                          # Source code
-│   └── tst/
-│       ├── __init__.py           # Package initialization
-│       ├── ternary_search_tree.py # Main TST implementation
-│       └── node.py               # TST node implementation
-├── 
-├── tests/                        # Test suite
+│
+├── benchmark/              # Benchmark experiments and performance comparison
+│   └── benchmark.py
+│
+├── data/                   # Input word lists
+│   ├── corncob_lowercase.txt     # Full dictionary (58,110 words)
+│   ├── insert_words.txt          # Used for unit test insertions
+│   └── not_insert_words.txt      # Used for negative test cases
+│
+├── tstree/                 # TSTree implementation
 │   ├── __init__.py
-│   ├── test_performance.py       # Performance tests
-│   └── conftest.py               # Test configuration
-├── 
-├── benchmarks/                   # Performance benchmarking
-│   ├── benchmark.py          # HPC benchmarking script
-│   ├── slurm_job.sh         # SLURM job script
-│   └── results/                  # Benchmark results (generated)
-├── 
-├── data/                         # Test datasets
-│   ├── insert_words.txt          # Words to insert
-│   ├── not_insert_words.txt      # Words NOT to insert (negative tests)
-│   └── corncob_lowercase.txt     # Large English word dataset
-├── 
-├── scripts/                      # Utility scripts
-│   ├── run_tests.py              # Test runner
-│   └── generate_plots.py         # Plot generation
-├── 
-├── notebooks/                    # Jupyter notebooks (optional)
-│   └── demo.ipynb                # Interactive demonstration
-└── 
-└── docs/                         # Documentation (generated)
+│   └── tstree.py
+│
+├── btree/                  # Btree implementation (used for comparison)
+│   ├── __init__.py
+│   └── btree.py
+│
+├── tests/                  # Unit tests
+│   ├── __init__.py
+│   └── tests_tstree.py
+│
+├── slurm_job.sh            # SLURM script to run benchmarks on HPC
+├── README.md               # This file
+└── .gitignore
 ```
 
-## 🚀 Quick Start
+## Quick Start
 
 ### Prerequisites
 
@@ -72,96 +63,23 @@ ternary-search-tree/
 
 2. **Install dependencies**:
    ```bash
-   pip install -r requirements.txt
+   python3 -m venv venv
+   source venv/bin/activate 
+   pip install -r requirements.txt  
    ```
 
-3. **Install the package** (development mode):
+3. **Run Benchmarks**:
    ```bash
-   pip install -e .
+   python3 benchmark/benchmark.py
    ```
-
-
-### Run Specific Tests
-
-```bash
-# Correctness tests only
-python -m pytest tests/test_correctness.py -v
-
-# Performance tests only  
-python -m pytest tests/test_performance.py -v
-
-# Skip slow tests
-python -m pytest -m "not slow"
-```
-
-## 📊 Performance Benchmarking
-
-### Local Benchmarking
-
-```bash
-cd benchmarks
-
-# Quick local benchmark
-python hpc_benchmark.py --quick
-
-# Full benchmark with corncob dataset
-python hpc_benchmark.py --dataset corncob
-
-# Comparison with built-in structures only
-python hpc_benchmark.py --comparison-only
-```
-
-### HPC Benchmarking
-
-1. **Prepare the environment**:
-   - Ensure your data files are in the `data/` directory
-   - Modify `hpc_job_script.sh` for your specific HPC system
-
-2. **Submit the job**:
+4. **Run Test**:
    ```bash
-   cd benchmarks
-   sbatch hpc_job_script.sh
+   python3 -m tests.tests_tstree
    ```
-
-3. **Monitor progress**:
+5. **Run on HPC**
    ```bash
-   squeue -u $USER
-   tail -f tst_benchmark_*.out
+   sbatch slurm_job.slurm
    ```
-
-4. **View results**:
-   ```bash
-   ls -la results/
-   cat results/benchmark_summary.txt
-   ```
-
-### Generate Performance Plots
-
-```bash
-# Generate plots from benchmark results
-python scripts/generate_plots.py benchmarks/results/benchmark_results_corncob.json
-
-# Specify output directory
-python scripts/generate_plots.py results/benchmark_results.json --output-dir plots
-```
-
-## 🔬 Algorithm Analysis
-
-### Time Complexity
-
-| Operation | Best Case | Average Case | Worst Case |
-|-----------|-----------|--------------|------------|
-| Insert    | O(log n)  | O(log n)     | O(n)       |
-| Search    | O(log n)  | O(log n)     | O(n)       |
-| Delete    | O(log n)  | O(log n)     | O(n)       |
-| Prefix    | O(log n + k) | O(log n + k) | O(n + k) |
-
-*Where n = number of words, k = number of matches*
-
-### Space Complexity
-
-- **Space**: O(n) where n is the total number of characters across all words
-- **Node overhead**: Each character requires one TSTNode (~40-50 bytes in Python)
 
 ### Performance Characteristics
 
@@ -212,32 +130,6 @@ Tested on HPC infrastructure with 58,000+ word dataset:
 - Total insertion: ~1.2 seconds
 - Search performance: ~50 microseconds per word
 - Scales well across multiple dataset sizes
-
-## 🛠️ Development
-
-### Code Quality
-
-We maintain high code quality with:
-
-```bash
-# Format code
-black src/ tests/
-
-# Check linting  
-flake8 src/ tests/ --max-line-length=88
-
-# Type checking
-mypy src/tst/ --ignore-missing-imports
-```
-
-### Contributing
-
-1. Fork the repository
-2. Create a feature branch: `git checkout -b feature/your-feature`
-3. Make your changes with appropriate tests
-4. Run the test suite: `python scripts/run_tests.py`
-5. Submit a pull request
-
 
 ## 📖 References
 
