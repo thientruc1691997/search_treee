@@ -174,12 +174,6 @@ def compare_btree_tstree(insert_sample, hold_out_sample, prefix="ca"):
     print(f"Btree search time:   {btree_search_time:.4f}s")
     print(f"TSTree search time:  {tstree_search_time:.4f}s")
 
-    # All strings
-    _, btree_all_time = time_function(btree.all_strings)
-    _, tstree_all_time = time_function(tstree.all_strings)
-
-    print(f"Btree all_strings(): {btree_all_time:.4f}s")
-    print(f"TSTree all_strings(): {tstree_all_time:.4f}s")
 
     # Prefix search on TSTree
     _, tstree_prefix_time = time_function(tstree.starts_with, prefix)
@@ -191,7 +185,6 @@ def compare_btree_tstree(insert_sample, hold_out_sample, prefix="ca"):
     print(f"{'-'*44}")
     print(f"{'Insert':<20}{btree_insert_time:12.4f}{tstree_insert_time:12.4f}")
     print(f"{'Search':<20}{btree_search_time:12.4f}{tstree_search_time:12.4f}")
-    print(f"{'All Strings':<20}{btree_all_time:12.4f}{tstree_all_time:12.4f}")
     print(f"{'Prefix Search':<20}{'N/A':>12}{tstree_prefix_time:12.4f}")
 
 

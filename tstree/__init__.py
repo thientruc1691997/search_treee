@@ -1,4 +1,4 @@
-from .tstree import TSTree, TSTreeNode
+from tstree import TSTree, TSTreeNode
 
 __all__ = [
     "TSTree",

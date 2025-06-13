@@ -1,0 +1,73 @@
+SLURM_JOB_ID: 58227207
+SLURM_JOB_USER: vsc37492
+SLURM_JOB_ACCOUNT: lp_h_ds_students
+SLURM_JOB_NAME: benchmark_tstree
+SLURM_CLUSTER_NAME: genius
+SLURM_JOB_PARTITION: batch
+SLURM_NNODES: 1
+SLURM_NODELIST: r26i27n01
+SLURM_JOB_CPUS_PER_NODE: 1
+Date: Fri Jun 13 22:29:22 CEST 2025
+Walltime: 00-02:00:00
+========================================================================
+Total words loaded: 58110
+First 10 words: ['ardvark', 'aardwolf', 'aaron', 'aback', 'abacus', 'abaft', 'abalone', 'abandon', 'abandoned', 'abandonmaent']
+
+Insert Performance Benchmark
+     100 words → Insert avg: 0.11 ms
+     500 words → Insert avg: 0.12 ms
+    1000 words → Insert avg: 0.12 ms
+    5000 words → Insert avg: 0.12 ms
+   10000 words → Insert avg: 0.12 ms
+   20000 words → Insert avg: 0.14 ms
+   30000 words → Insert avg: 0.13 ms
+   40000 words → Insert avg: 0.13 ms
+   50000 words → Insert avg: 0.13 ms
+
+Search Performance (Fixed Sample)
+     100 words → Search avg: 0.05 ms
+     500 words → Search avg: 0.06 ms
+    1000 words → Search avg: 0.06 ms
+    5000 words → Search avg: 0.09 ms
+   10000 words → Search avg: 0.11 ms
+   20000 words → Search avg: 0.11 ms
+   30000 words → Search avg: 0.11 ms
+   40000 words → Search avg: 0.12 ms
+   50000 words → Search avg: 0.12 ms
+
+Search Performance (Random from Inserted)
+     100 words → Search avg (random): 0.09 ms
+     500 words → Search avg (random): 0.10 ms
+    1000 words → Search avg (random): 0.10 ms
+    5000 words → Search avg (random): 0.12 ms
+   10000 words → Search avg (random): 0.11 ms
+   20000 words → Search avg (random): 0.12 ms
+   30000 words → Search avg (random): 0.13 ms
+   40000 words → Search avg (random): 0.13 ms
+   50000 words → Search avg (random): 0.13 ms
+
+----------------------------------------------
+
+Comparing TSTree and Python set for 100-word 
+Insert time (set):     8.3520 ms
+Insert time (TSTree):  506.1299 ms
+Search time (set):     0.0264 ms
+Search time (TSTree):  0.5929 ms
+
+----------------------------------------------
+
+Comparing TSTree and BTree
+
+Inserting 58010 words...
+Btree insert time:   0.3453s
+TSTree insert time:  0.5762s
+Btree search time:   0.0008s
+TSTree search time:  0.0006s
+TSTree prefix search (prefix='ca'): 0.0011s
+
+Summary:
+Operation                  Btree      TSTree
+--------------------------------------------
+Insert                    0.3453      0.5762
+Search                    0.0008      0.0006
+Prefix Search                N/A      0.0011
