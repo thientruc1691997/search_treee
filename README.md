@@ -2,7 +2,7 @@
 
 This project implements a Ternary Search Tree (TST) in Python for efficient string storage and prefix searching, and compares its performance against traditional data structures like Binary Search Tree (Btree) and Python's built-in set.
 
-### Key Features
+## Key Features
 
 - **Complete TST Implementation**: Object-oriented design with full functionality
 - **Testing**: Unit tests, and performance tests  
@@ -19,6 +19,7 @@ ternary-search-tree/
 │   ├── benchmark.py                      # Benchmark experiments and performance comparison
 │   ├── benchmark_output_58227207.log     # Benchmark results in HPC
 │   └── plot/
+│
 ├── data/                   # Input word lists
 │   ├── corncob_lowercase.txt     # 58,110 words list, used for benchmark
 │   ├── insert_words.txt          # Used for unit test insertions
@@ -72,7 +73,7 @@ ternary-search-tree/
    sbatch slurm_job.slurm
    ```
 
-### Performance Characteristics
+## Performance Characteristics
 
 Although TSTree is slower than BTree and Python's set for full-string insert and search operations, it offers a key advantage: efficient prefix-based lookup.
 
@@ -80,7 +81,7 @@ Unlike set or BTree, which lack native support for prefix queries, TSTree enable
 
 In short, TSTree trades some performance for greater query flexibility.
 
-# Evaluation Strategy
+### Evaluation Strategy
 To thoroughly assess the functionality and performance of the Ternary Search Tree, three types of tests were conducted on a high-performance computing (HPC) environment:
 
 - Unit Tests
@@ -89,7 +90,7 @@ To thoroughly assess the functionality and performance of the Ternary Search Tre
 
 - Benchmark Comparison with BTree and Python set
 
-1. Unit Tests:
+1. **Unit Tests**
 
 Unit testing was carried out using the TSTreeTester class on an initially empty tree, with the following objectives:
 
@@ -103,39 +104,39 @@ Unit testing was carried out using the TSTreeTester class on an initially empty 
 
 All four test cases passed successfully, confirming the correctness of the core TSTree functionality.
 
-2. Benchmark TSTree on large dataset
+2. **Benchmark TSTree on large dataset**
 
 We benchmarked TSTree using the corncob_lowercase.txt file (~58,000 sorted words) under varying dataset sizes and sampling methods.
 
-- Insertion Performance: TSTree exhibits robust insert speeds, maintaining ≤0.70 ms per word even at 50,000-word scale.
+- **Insertion Performance**: TSTree exhibits robust insert speeds, maintaining ≤0.70 ms per word even at 50,000-word scale.
 ![alt text](benchmark/plot/image-4.png)
-- Search Performance (Fixed Sample): TSTree provides consistent and fast search times (typically ≤0.40 ms) for a fixed set of queries.
+- **Search Performance (Fixed Sample)**: TSTree provides consistent and fast search times (typically ≤0.40 ms) for a fixed set of queries.
 ![alt text](benchmark/plot/image-3.png)
-- Search Performance (Random Sample): TSTree also handles random-access search efficiently, with average lookup times between 0.20–0.50 ms.
+- **Search Performance (Random Sample)**: TSTree also handles random-access search efficiently, with average lookup times between 0.20–0.50 ms.
 ![alt text](benchmark/plot/image-2.png)
 
 These results confirm that TSTree is well-suited for real-time, large-scale applications that rely on flexible search capabilities.
-3. Benchmark Comparison with BTree and Python set
+3. **Benchmark Comparison with BTree and Python set**
 
 To evaluate TSTree in context, we compared its performance and structure against two other data structures: BTree and Python’s built-in set.
 
-# Procedure
+**Procedure**
 - Loaded and validated the word list from corncob_lowercase.txt.
 
 - Measured insert/search times for increasing dataset sizes (100 to 50,000 words).
 
 - Performed qualitative comparisons based on structure and capabilities.
 
-# Structural Differences
+**Structural Differences**
 - BTree organizes data via node-based key ordering:
-![alt text](image-1.png)
+![alt text](benchmark/plot/image-1.png)
 
 - TSTree uses character-wise ternary branching:
-![alt text](image.png)
+![alt text](benchmark/plot/image.png)
 
 These structural differences lead to varied performance and feature support.
 
-# Performance Summary
+**Performance Summary**
 ```
 | Feature / Operation       | Python `set`              | `BTree`                      | `TSTree`                         |
 | ------------------------- | ------------------------- | ---------------------------- | -------------------------------- |
@@ -145,23 +146,23 @@ These structural differences lead to varied performance and feature support.
 | **All Strings (Ordered)** | No (unordered)             | Yes                            | Yes                                |
 | **Prefix Search**         | No                         | No                            | Yes (0.2 ms for prefix = "ca")     |
 ```
-## Results Summary
-# Functional Correctness
+### Results Summary
+**Functional Correctness**
 - All unit tests passed, verifying insertion, exact-match, negative, and full retrieval operations.
 
-# Performance Summary
+**Performance Summary**
 - TSTree is slower than BTree and set in raw operations but uniquely supports prefix search, making it ideal for applications like autocomplete.
 
 - BTree offers good speed and ordered retrieval but lacks prefix functionality.
 
 - Python set is fastest for lookups but is unordered and cannot support prefix queries.
 
-# Conclusion
+### Conclusion
 If the application prioritizes exact-match performance or unordered bulk storage, set or BTree may be more efficient.
 
 However, if prefix matching (e.g., autocomplete, search suggestions) is critical, then TSTree is a powerful and scalable choice. It balances reasonable speed with flexible query capabilities and maintains excellent performance even on large-scale datasets.
 
-## 📖 References
+## References
 
 1. Bentley, J., & Sedgewick, R. (1997). *Fast algorithms for sorting and searching strings*. SODA '97.
 2. Sedgewick, R., & Wayne, K. (2011). *Algorithms* (4th ed.). Addison-Wesley.
