@@ -3,8 +3,8 @@
 This project implements a Ternary Search Tree (TST) in Python for efficient string storage and prefix searching, and compares its performance against traditional data structures like Binary Search Tree (Btree) and Python's built-in set.
 
 ## Author
-Nguyen Thien Truc Do, UHasselt, 2469632
-Nhung Nguyen, UHasselt, 2470664
+- Nguyen Thien Truc Do, UHasselt, 2469632
+- Nhung Nguyen, UHasselt, 2470664
 
 ## Key Features
 
