@@ -144,11 +144,11 @@ These structural differences lead to varied performance and feature support.
 ```
 | Feature / Operation       | Python `set`              | `BTree`                      | `TSTree`                         |
 | ------------------------- | ------------------------- | ---------------------------- | -------------------------------- |
-| **Structure**             | Hash-based, unordered     | Balanced tree (binary order) | Ternary character-wise branching                        |
-| **Insert (1000 words)**   | 18.95 ms (100 words case) | 6.2 ms                       | 18.1 ms                               |
-| **Search (1000 words)**   | \~0.00 ms                 | 0.7 ms                       | 1.1 ms                               |
+| **Structure**             | Hash-based, unordered     | Balanced tree (binary order) | Ternary character-wise branching |
+| **Insert (1000 words)**   | 18.95 ms (100 words case) | 6.2 ms                       | 18.1 ms                          |
+| **Search (1000 words)**   | \~0.00 ms                 | 0.7 ms                       | 1.1 ms                          |
 | **All Strings (Ordered)** | No (unordered)            | Yes                          | Yes                              |
-| **Prefix Search**         | No                        | No                           | Yes (0.2 ms for prefix = "ca")                            |
+| **Prefix Search**         | No                        | No                           | Yes (0.2 ms for prefix = "ca")     |
 ```
 ### Results Summary
 **Functional Correctness**
