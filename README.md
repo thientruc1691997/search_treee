@@ -86,7 +86,7 @@ To thoroughly assess the functionality and performance of the Ternary Search Tre
 
 - Unit Tests
 
-- Benchmark TSTree on large dataset (with fixed/random sample)
+- Benchmark TSTree on large dataset (with fixed/shuffled sample)
 
 - Benchmark Comparison with BTree and Python set
 
@@ -113,7 +113,7 @@ We benchmarked TSTree using the corncob_lowercase.txt file (~58,000 sorted words
 ![alt text](benchmark/plot/image-4.png)
 - **Search Performance (Fixed Sample)**: TSTree provides consistent and fast search times (typically ≤0.40 ms) for a fixed set of queries.
 ![alt text](benchmark/plot/image-3.png)
-- **Search Performance (Random Sample)**: TSTree also handles random-access search efficiently, with average lookup times between 0.20–0.50 ms.
+- **Search Performance (Shuffled Sample)**: TSTree also handles shuffled-access search efficiently, with average lookup times between 0.20–0.50 ms.
 ![alt text](benchmark/plot/image-2.png)
 
 These results confirm that TSTree is well-suited for real-time, large-scale applications that rely on flexible search capabilities.
