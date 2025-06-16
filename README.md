@@ -109,6 +109,7 @@ All four test cases passed successfully, confirming the correctness of the core 
 We benchmarked TSTree using the corncob_lowercase.txt file (~58,000 sorted words) under varying dataset sizes and sampling methods.
 
 - **Insertion Performance**: TSTree exhibits robust insert speeds, maintaining ≤0.70 ms per word even at 50,000-word scale.
+
 ![alt text](benchmark/plot/image-4.png)
 - **Search Performance (Fixed Sample)**: TSTree provides consistent and fast search times (typically ≤0.40 ms) for a fixed set of queries.
 ![alt text](benchmark/plot/image-3.png)
@@ -116,6 +117,7 @@ We benchmarked TSTree using the corncob_lowercase.txt file (~58,000 sorted words
 ![alt text](benchmark/plot/image-2.png)
 
 These results confirm that TSTree is well-suited for real-time, large-scale applications that rely on flexible search capabilities.
+
 3. **Benchmark Comparison with BTree and Python set**
 
 To evaluate TSTree in context, we compared its performance and structure against two other data structures: BTree and Python’s built-in set.
@@ -129,9 +131,11 @@ To evaluate TSTree in context, we compared its performance and structure against
 
 **Structural Differences**
 - BTree organizes data via node-based key ordering:
+
 ![alt text](benchmark/plot/image-1.png)
 
 - TSTree uses character-wise ternary branching:
+
 ![alt text](benchmark/plot/image.png)
 
 These structural differences lead to varied performance and feature support.
@@ -140,11 +144,11 @@ These structural differences lead to varied performance and feature support.
 ```
 | Feature / Operation       | Python `set`              | `BTree`                      | `TSTree`                         |
 | ------------------------- | ------------------------- | ---------------------------- | -------------------------------- |
-| **Structure**             | Hash-based, unordered     | Balanced tree (binary order) | Ternary character-wise branching |
-| **Insert (1000 words)**   | 18.95 ms (100 words case) | 6.2 ms                       | 18.1 ms                          |
-| **Search (1000 words)**   | \~0.00 ms                 | 0.7 ms                       | 1.1 ms                           |
-| **All Strings (Ordered)** | No (unordered)             | Yes                            | Yes                                |
-| **Prefix Search**         | No                         | No                            | Yes (0.2 ms for prefix = "ca")     |
+| **Structure**             | Hash-based, unordered     | Balanced tree (binary order) | Ternary character-wise branching                        |
+| **Insert (1000 words)**   | 18.95 ms (100 words case) | 6.2 ms                       | 18.1 ms                               |
+| **Search (1000 words)**   | \~0.00 ms                 | 0.7 ms                       | 1.1 ms                               |
+| **All Strings (Ordered)** | No (unordered)            | Yes                          | Yes                              |
+| **Prefix Search**         | No                        | No                           | Yes (0.2 ms for prefix = "ca")                            |
 ```
 ### Results Summary
 **Functional Correctness**
