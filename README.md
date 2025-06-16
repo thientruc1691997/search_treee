@@ -2,6 +2,10 @@
 
 This project implements a Ternary Search Tree (TST) in Python for efficient string storage and prefix searching, and compares its performance against traditional data structures like Binary Search Tree (Btree) and Python's built-in set.
 
+## Author
+Nguyen Thien Truc Do, UHasselt, 2469632
+Nhung Nguyen, UHasselt, 2470664
+
 ## Key Features
 
 - **Complete TST Implementation**: Object-oriented design with full functionality
@@ -151,7 +155,7 @@ These structural differences lead to varied performance and feature support.
 | **Prefix Search**         | No                        | No                           | Yes (0.2 ms for prefix = "ca")   |
 ```
 ### Results Summary
-**Functional Correctness**
+**Functional Testing**
 - All unit tests passed, verifying insertion, exact-match, negative, and full retrieval operations.
 
 **Performance Summary**
@@ -168,8 +172,6 @@ However, if prefix matching (e.g., autocomplete, search suggestions) is critical
 
 ## References
 
-1. Bentley, J., & Sedgewick, R. (1997). *Fast algorithms for sorting and searching strings*. SODA '97.
-2. Sedgewick, R., & Wayne, K. (2011). *Algorithms* (4th ed.). Addison-Wesley.
-3. [Wikipedia: Ternary Search Tree](https://en.wikipedia.org/wiki/Ternary_search_tree)
-4. [VSC Documentation](https://docs.vscentrum.be/) for HPC usage guidelines
-
+1. Bex, G. J. (2025). b-trees.ipynb [Jupyter notebook]. Concept of Data Science, Hasselt University. Internal course material.
+2. [Wikipedia: Ternary Search Tree](https://en.wikipedia.org/wiki/Ternary_search_tree)
+3. [VSC Documentation](https://docs.vscentrum.be/) for HPC usage guidelines
