@@ -24,6 +24,20 @@ class TSTreeTester:
             f'{len(self.tree)} in tree, expected {len(self.unique_words)}'
         for word in self.unique_words:
             assert self.tree.search(word), f"Word '{word}' should be found in the tree."
+    
+    def test_non_inserted_words(self):
+        with open(self.not_insert_path) as file:
+            for line in file:
+                word = line.strip()
+                if word:
+                    assert not self.tree.search(word), f"Word '{word}' should NOT be in the tree."
+
+    def test_all_strings(self):
+        all_strings = self.tree.all_strings()
+        assert len(all_strings) == len(self.unique_words), \
+            f"Expected {len(self.unique_words)} unique words, but got {len(all_strings)}."
+        for word in all_strings:
+            assert word in self.unique_words, f"Unexpected word '{word}' in tree output."
 
 
     def run_all_tests(self):
